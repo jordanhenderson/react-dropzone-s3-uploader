@@ -101,7 +101,9 @@ export default class DropzoneS3Uploader extends React.Component {
   }
 
   handleDrop = (files, rejectedFiles) => {
-    this.setState({filenames: [], filename: null, error: null, progress: null})
+    const state = this.state || {}
+    const {filenames} = state;
+    this.setState({filenames: this.props.multiple && filenames ? filenames : [], filename: null, error: null, progress: null})
 
     const options = Object.assign({
       files,
