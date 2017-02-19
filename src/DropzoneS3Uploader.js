@@ -155,10 +155,11 @@ export default class DropzoneS3Uploader extends React.Component {
     const childProps = {fileUrl, fileUrls, s3Url, filename, filenames, progress, error, imageStyle}
 
     let contents = null
-    if (this.props.children) {
+    if(this.props.fileComponent) {
+      contents = (<FileComponent {...childProps} />)
+    } else if (this.props.children) {
       contents = this.props.children
-    }
-    else if (fileUrl) {
+    } else if (fileUrl) {
       if (this.props.isImage(fileUrl)) {
         contents = (<img src={fileUrl} style={imageStyle} />)
       }
